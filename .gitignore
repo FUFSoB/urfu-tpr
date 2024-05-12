@@ -1,7 +1,7 @@
 __pycache__/
 canvas/
-dataset/
-fonts/
+dataset*
+fonts*
 output/
 venv/
 

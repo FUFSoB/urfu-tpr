@@ -6,6 +6,7 @@ import keras
 import json
 from PIL import Image
 from io import BytesIO
+import os
 
 from utils import resize_image, pretty_predictions
 
@@ -75,6 +76,7 @@ def draw_kana():
             f.write(ps)
         img = Image.open("temp.ps")
         img = np.array(img)
+        os.remove("temp.ps")
         prediction, _ = predict_image(img)
         text = pretty_predictions(prediction, entry.get() or None)
         guess_label.config(text=text)

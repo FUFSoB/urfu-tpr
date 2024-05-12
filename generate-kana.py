@@ -219,7 +219,7 @@ def collage_all_images():
 
 if __name__ == "__main__":
     # generate_previews()
-    # generate_images()
-    # generate_json_neural_mapping()
-    # checksum_dataset_images()
+    generate_images()
+    generate_json_neural_mapping()
+    checksum_dataset_images()
     collage_all_images()
