@@ -1,0 +1,9 @@
+__pycache__/
+canvas/
+dataset/
+fonts/
+output/
+venv/
+
+canvas.png
+collage.png

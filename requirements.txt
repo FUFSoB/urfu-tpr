@@ -1,0 +1,9 @@
+pyjson5
+pillow
+numpy
+matplotlib
+tensorflow
+regex
+pandas
+keras
+opencv-python
