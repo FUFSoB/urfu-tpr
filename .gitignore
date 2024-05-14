@@ -5,5 +5,5 @@ fonts*
 output/
 venv/
 
-canvas.png
+canvas*.png*
 collage.png
