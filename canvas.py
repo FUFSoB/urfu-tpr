@@ -45,7 +45,7 @@ def create_canvas(with_hints=False) -> Image.Image:
     if with_hints:
         print("Hints:", hints)
         with open(output_dir / "hints.json", "w") as f:
-            json.dump(hints, f)
+            json.dump(hints, f, ensure_ascii=False)
     return img
 
 

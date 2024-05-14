@@ -77,7 +77,13 @@ def draw_kana():
         img = Image.open("temp.ps")
         img = np.array(img)
         os.remove("temp.ps")
-        prediction, _ = predict_image(img)
+        prediction, new_image = predict_image(img)
+        new_image = Image.fromarray(new_image)
+        b = BytesIO()
+        new_image.save(b, format="PNG")
+        predict_canvas.image = None
+        predict_canvas.image = tk.PhotoImage("data", data=b.getvalue())
+        predict_canvas.create_image(0, 0, image=predict_canvas.image, anchor="nw")
         text = pretty_predictions(prediction, entry.get() or None)
         guess_label.config(text=text)
         # print(pretty_predictions(prediction))
@@ -106,6 +112,9 @@ def draw_kana():
 
     button = tk.Button(root, text="Close", command=close)
     button.pack()
+
+    predict_canvas = tk.Canvas(root, width=64, height=64, bg="white")
+    predict_canvas.pack()
 
     guess_label = tk.Label(root, text="Draw a kana")
     guess_label.pack()
