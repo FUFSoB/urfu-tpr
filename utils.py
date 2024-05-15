@@ -6,6 +6,7 @@ def resize_image(image: np.ndarray, size: int, antialias: bool = False) -> np.nd
     image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     # Find non-white pixels
+    image_gray[image_gray >= 240] = 255
     non_white_pixels = cv2.findNonZero(cv2.bitwise_not(image_gray))
 
     if non_white_pixels is None:
