@@ -71,6 +71,7 @@ def draw_kana():
 
     def clear():
         canvas.delete("all")
+        entry.delete(0, "end")
 
     def predict():
         ps = canvas.postscript(colormode="color")
