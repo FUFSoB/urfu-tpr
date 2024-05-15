@@ -15,7 +15,6 @@ dataset = pd.read_csv(current_dir / "dataset/data.csv")
 
 
 def get_random_hint() -> tuple[Image.Image, str]:
-    # Get a random image from the dataset
     row = dataset.sample()
     path = row["path"].values[0]
     img = Image.open(current_dir / path)
@@ -27,7 +26,6 @@ def get_random_hint() -> tuple[Image.Image, str]:
 
 
 def create_canvas(with_hints=False) -> Image.Image:
-    # Create a new image with 4x4 grid of 64x64 cells without borders
     img = Image.new("L", (64 * 4 + 1, 64 * 4 + 1), color="white")
     draw = ImageDraw.Draw(img)
     hints = []
@@ -51,7 +49,6 @@ def create_canvas(with_hints=False) -> Image.Image:
 
 
 def parse_canvas(canvas: Image.Image) -> list[Image.Image]:
-    # Parse the canvas into 16 64x64 images
     images = []
     for i in range(4):
         for j in range(4):
@@ -70,9 +67,11 @@ if __name__ == "__main__":
         canvas.save("canvas.png")
         if (output_dir / "hints.json").exists():
             os.remove(output_dir / "hints.json")
+
     elif arg == "create_with_hints":
         canvas = create_canvas(with_hints=True)
         canvas.save("canvas.png")
+
     elif arg == "parse":
         output_dir.mkdir(exist_ok=True)
         canvas = Image.open("canvas.png")

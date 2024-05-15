@@ -30,9 +30,6 @@ def predict_image(image: np.ndarray) -> tuple[dict[str, float], np.ndarray]:
         for i in range(len(labels_map))
     }
     dct = {k: v for k, v in sorted(dct.items(), key=lambda item: item[1], reverse=True)}
-    # argmax = np.argmax(pred)
-    # label = list(labels_map.keys())[argmax]
-    # confidence = pred[argmax]
     return dct, image
 
 
@@ -51,13 +48,11 @@ def draw_kana():
         return wrapper
 
     def paint(event):
-        # print("paint")
         x1, y1 = (event.x - 1), (event.y - 1)
         x2, y2 = (event.x + 1), (event.y + 1)
         canvas.create_oval(x1, y1, x2, y2, fill="black", width=5)
 
     def hint():
-        # print("hint")
         path = np.random.choice(dataset["path"])
         item = dataset[dataset["path"] == path].iloc[0]
         image = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
@@ -75,11 +70,9 @@ def draw_kana():
         entry.insert(0, item["kana"])
 
     def clear():
-        # print("clear")
         canvas.delete("all")
 
     def predict():
-        # print("predict")
         ps = canvas.postscript(colormode="color")
         img = Image.open(BytesIO(bytes(ps,'ascii')))
         img = np.array(img)
@@ -92,10 +85,8 @@ def draw_kana():
         predict_canvas.create_image(0, 0, image=predict_canvas.image, anchor="nw")
         text = pretty_predictions(prediction, entry.get() or None)
         guess_label.config(text=text)
-        # print(pretty_predictions(prediction))
 
     def close():
-        # print("close")
         root.destroy()
 
     real_time = tk.BooleanVar()
@@ -105,7 +96,6 @@ def draw_kana():
     canvas.bind("<ButtonRelease-1>", lambda e: real_time.get() and threaded(predict)())
     canvas.pack()
 
-    # input box for kana from dataset
     should_be_input = tk.StringVar()
     entry = tk.Entry(buttons_frame, textvariable=should_be_input)
     entry.pack()
@@ -113,7 +103,6 @@ def draw_kana():
     button = tk.Button(buttons_frame, text="Predict", command=threaded(predict))
     button.pack()
 
-    # checkbox "Real-time"
     checkbox = tk.Checkbutton(buttons_frame, text="Real-time", variable=real_time)
     checkbox.pack()
 
